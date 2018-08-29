@@ -2,6 +2,7 @@
 
 const puppeteer = require('puppeteer')
 const devices = require('puppeteer/DeviceDescriptors')
+const port = process.env.PORT || 8080;
 
 const captureScreenshots = async () => {
   const devicesToEmulate = [
@@ -47,5 +48,5 @@ http.createServer(function (req, res) {
         }
     });
     captureScreenshots() 
-}).listen(3333);
+}).listen(port);
 console.log("Server running at http://localhost:3333/");
