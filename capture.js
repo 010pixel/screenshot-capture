@@ -27,5 +27,25 @@ const captureScreenshots = async () => {
 
   await browser.close()
 }
+  
+//include http, fs and url module
+var http = require('http'),
+    fs = require('fs'),
+    imageDir = './';
 
-captureScreenshots()
+http.createServer(function (req, res) {
+    //use the url to parse the requested url and get the image name
+    fs.readFile(imageDir + 'iPhone 6.png', function (err, content) {
+        if (err) {
+            res.writeHead(400, {'Content-type':'text/html'})
+            console.log(err);
+            res.end("No such image");    
+        } else {
+            //specify the content type in the response will be an image
+            res.writeHead(200,{'Content-type':'image/jpg'});
+            res.end(content);
+        }
+    });
+    captureScreenshots() 
+}).listen(3333);
+console.log("Server running at http://localhost:3333/");
