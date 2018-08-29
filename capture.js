@@ -13,7 +13,7 @@ const captureScreenshots = async () => {
     'iPad Pro'
   ]
 
-  const browser = await puppeteer.launch()
+  const browser = await puppeteer.launch({ args: ['--no-sandbox', '--disable-setuid-sandbox'] })
   const page = await browser.newPage()
 
   // capture a screenshot of each device we wish to emulate (`devicesToEmulate`)
